@@ -1,0 +1,299 @@
+/* ==========================================================================
+   style.css  —  VISUAL DO SITE
+   ==========================================================================
+   Para mudar as CORES do site inteiro, edite só o bloco ":root" logo abaixo.
+   Organização do arquivo:
+     1. Cores e medidas (variáveis)
+     2. Base (reset, texto, links)
+     3. Layout geral (conteiner, seções, grade)
+     4. Topo e menu
+     5. Início (hero)
+     6. Botões
+     7. Cartões, etiquetas e contatos
+     8. Rodapé
+     9. Celular (telas pequenas)
+    10. Acessibilidade (menos animação)
+   ========================================================================== */
+
+
+/* ------------------------------------------------------------------
+   1) CORES E MEDIDAS  ← EDITE AQUI PARA TROCAR O VISUAL
+   ------------------------------------------------------------------ */
+:root {
+  --cor-fundo:        #14151c;  /* fundo principal da página        */
+  --cor-fundo-alt:    #1a1b24;  /* fundo das seções alternadas      */
+  --cor-cartao:       #20212c;  /* fundo dos cartões                */
+  --cor-borda:        #2e3040;  /* linhas e bordas discretas        */
+  --cor-texto:        #eceaf4;  /* texto principal                  */
+  --cor-texto-suave:  #a09eb3;  /* texto secundário                 */
+  --cor-destaque:     #8b7cf6;  /* cor de destaque (violeta)        */
+  --cor-destaque-2:   #a89cff;  /* destaque ao passar o mouse       */
+
+  --largura-max:      1040px;   /* largura máxima do conteúdo       */
+  --largura-texto:    680px;    /* largura de blocos de leitura     */
+  --raio:             10px;     /* arredondamento dos cantos        */
+  --fonte: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+
+/* ------------------------------------------------------------------
+   2) BASE
+   ------------------------------------------------------------------ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px; /* evita que o menu fixo cubra o título ao navegar */
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+}
+
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .6em; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin-bottom: 1em; }
+h3 { font-size: 1.15rem; }
+p  { margin: 0 0 1em; }
+
+a { color: var(--cor-destaque-2); }
+a:hover { color: var(--cor-texto); }
+
+/* Contorno visível para quem usa o teclado */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--cor-destaque-2);
+  outline-offset: 3px;
+}
+
+/* Link "pular para o conteúdo": só aparece ao navegar com Tab */
+.pular {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  padding: .6rem 1rem;
+  background: var(--cor-destaque);
+  color: #fff;
+  border-radius: var(--raio);
+  z-index: 100;
+}
+.pular:focus { top: 1rem; }
+
+
+/* ------------------------------------------------------------------
+   3) LAYOUT GERAL
+   ------------------------------------------------------------------ */
+.conteiner {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+.estreito { max-width: calc(var(--largura-texto) + 2.5rem); }
+
+.secao { padding: 5rem 0; }
+.secao-alt { background: var(--cor-fundo-alt); }
+
+/* Grade que se ajusta sozinha ao tamanho da tela */
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+
+/* ------------------------------------------------------------------
+   4) TOPO E MENU
+   ------------------------------------------------------------------ */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(20, 21, 28, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+}
+
+.logo {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--cor-texto);
+}
+
+.menu {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu a {
+  text-decoration: none;
+  color: var(--cor-texto-suave);
+  font-size: .95rem;
+}
+.menu a:hover { color: var(--cor-texto); }
+
+/* Botão do menu: escondido no computador, aparece no celular */
+.menu-botao {
+  display: none;
+  font: inherit;
+  color: var(--cor-texto);
+  background: none;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: .4rem .9rem;
+  cursor: pointer;
+}
+
+
+/* ------------------------------------------------------------------
+   5) INÍCIO (HERO)
+   ------------------------------------------------------------------ */
+.hero { padding: 6rem 0 5rem; }
+
+.hero-grade {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 3rem;
+}
+
+.hero-ola { color: var(--cor-texto-suave); margin-bottom: .4rem; }
+.hero-titulo { font-size: 1.25rem; color: var(--cor-destaque-2); margin-bottom: 1rem; }
+.hero-resumo { max-width: var(--largura-texto); color: var(--cor-texto-suave); }
+.hero-botoes { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+
+.hero-foto {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--cor-destaque);
+}
+.hero-foto[hidden] { display: none; }
+
+/* Única animação automática do site: o bloco de texto do início aparece suavemente ao abrir a página */
+.hero-texto { animation: entrada .8s ease-out both; }
+@keyframes entrada {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+
+/* ------------------------------------------------------------------
+   6) BOTÕES
+   ------------------------------------------------------------------ */
+.botao {
+  display: inline-block;
+  padding: .75rem 1.4rem;
+  border-radius: var(--raio);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background .2s, border-color .2s, color .2s;
+}
+.botao-principal { background: var(--cor-destaque); color: #fff; }
+.botao-principal:hover { background: var(--cor-destaque-2); color: #14151c; }
+
+.botao-secundario { border-color: var(--cor-borda); color: var(--cor-texto); }
+.botao-secundario:hover { border-color: var(--cor-destaque-2); color: var(--cor-texto); }
+
+
+/* ------------------------------------------------------------------
+   7) CARTÕES, ETIQUETAS E CONTATOS
+   ------------------------------------------------------------------ */
+.cartao {
+  background: var(--cor-cartao);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+}
+.cartao p { color: var(--cor-texto-suave); }
+
+.cartao-links { display: flex; gap: 1.2rem; margin-top: 1rem; }
+.link-simples { font-weight: 600; }
+
+/* Etiquetas (tecnologias) */
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.etiquetas li {
+  padding: .4rem .9rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-cartao);
+}
+.etiquetas-pequenas li { font-size: .85rem; padding: .2rem .7rem; }
+
+.contatos { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.5rem; }
+
+
+/* ------------------------------------------------------------------
+   8) RODAPÉ
+   ------------------------------------------------------------------ */
+.rodape {
+  padding: 2rem 0;
+  border-top: 1px solid var(--cor-borda);
+  color: var(--cor-texto-suave);
+  font-size: .9rem;
+}
+.rodape p { margin: 0; }
+
+
+/* ------------------------------------------------------------------
+   9) CELULAR (telas com até 720px de largura)
+   ------------------------------------------------------------------ */
+@media (max-width: 720px) {
+  .secao { padding: 3.5rem 0; }
+  .hero  { padding: 3.5rem 0; }
+
+  /* No celular, a foto vai para cima do texto */
+  .hero-grade { grid-template-columns: 1fr; }
+  .hero-foto  { order: -1; width: 140px; height: 140px; }
+
+  /* Menu vira uma lista que abre ao tocar no botão */
+  .menu-botao { display: block; }
+  .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--cor-fundo);
+    border-bottom: 1px solid var(--cor-borda);
+  }
+  .menu.aberto { display: flex; }
+  .menu a { display: block; padding: .9rem 1.25rem; }
+}
+
+
+/* ------------------------------------------------------------------
+   10) ACESSIBILIDADE — respeita quem prefere menos movimento
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-texto { animation: none; }
+  .botao { transition: none; }
+}

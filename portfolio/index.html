@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!--
+    ============================================================
+    index.html  —  ESTRUTURA DO SITE
+    ============================================================
+    Este arquivo só define a "moldura" da página.
+    Os TEXTOS e LINKS ficam em:  js/config.js   (edite lá!)
+    As CORES e o VISUAL ficam em: css/style.css
+    ============================================================
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Título da aba e descrição que aparece no Google. Pode trocar. -->
+  <title>Matheus Teixeira — Portfólio</title>
+  <meta name="description" content="Portfólio de Matheus Teixeira: estudante de Ciência da Computação e desenvolvedor web em formação.">
+  <meta name="theme-color" content="#14151c">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Atalho para quem navega pelo teclado (acessibilidade) -->
+  <a class="pular" href="#conteudo">Ir para o conteúdo</a>
+
+  <!-- =========================== TOPO / MENU =========================== -->
+  <header class="topo">
+    <nav class="nav conteiner" aria-label="Menu principal">
+      <!-- O nome curto é preenchido pelo JS (config.js → nomeCurto) -->
+      <a href="#inicio" class="logo" data-campo="nomeCurto"></a>
+
+      <!-- Botão que abre/fecha o menu no celular -->
+      <button class="menu-botao" id="menu-botao" aria-expanded="false" aria-controls="menu">Menu</button>
+
+      <ul class="menu" id="menu">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#o-que-faco">O que faço</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#tecnologias">Tecnologias</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- =========================== INÍCIO (HERO) =========================== -->
+    <section class="hero" id="inicio">
+      <div class="conteiner hero-grade">
+        <div class="hero-texto">
+          <p class="hero-ola">Olá, eu sou</p>
+          <h1 data-campo="nome"></h1>
+          <p class="hero-titulo" data-campo="titulo"></p>
+          <p class="hero-resumo" data-campo="resumo"></p>
+
+          <div class="hero-botoes">
+            <a class="botao botao-principal" href="#projetos">Ver projetos</a>
+            <a class="botao botao-secundario" href="#contato">Entrar em contato</a>
+          </div>
+        </div>
+
+        <!-- Foto: o JS usa a foto do seu perfil do GitHub automaticamente -->
+        <img class="hero-foto" id="foto" alt="" width="240" height="240" hidden>
+      </div>
+    </section>
+
+    <!-- =========================== SOBRE =========================== -->
+    <section class="secao" id="sobre">
+      <div class="conteiner estreito">
+        <h2>Sobre mim</h2>
+        <!-- Os parágrafos são criados pelo JS (config.js → sobre) -->
+        <div id="sobre-texto"></div>
+      </div>
+    </section>
+
+    <!-- =========================== O QUE FAÇO =========================== -->
+    <section class="secao secao-alt" id="o-que-faco">
+      <div class="conteiner">
+        <h2>O que faço</h2>
+        <div class="grade" id="lista-servicos"></div>
+      </div>
+    </section>
+
+    <!-- =========================== PROJETOS =========================== -->
+    <section class="secao" id="projetos">
+      <div class="conteiner">
+        <h2>Projetos</h2>
+        <div class="grade" id="lista-projetos"></div>
+      </div>
+    </section>
+
+    <!-- =========================== TECNOLOGIAS =========================== -->
+    <section class="secao secao-alt" id="tecnologias">
+      <div class="conteiner">
+        <h2>Tecnologias</h2>
+        <ul class="etiquetas" id="lista-tecnologias"></ul>
+      </div>
+    </section>
+
+    <!-- =========================== CONTATO =========================== -->
+    <section class="secao" id="contato">
+      <div class="conteiner estreito">
+        <h2>Contato</h2>
+        <p data-campo="chamadaContato"></p>
+        <!-- Os botões de contato são criados pelo JS (config.js → contatos) -->
+        <div class="contatos" id="lista-contatos"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================== RODAPÉ =========================== -->
+  <footer class="rodape">
+    <div class="conteiner">
+      <p>© <span id="ano"></span> <span data-campo="nome"></span></p>
+    </div>
+  </footer>
+
+  <!--
+    ORDEM IMPORTANTE:
+    1) config.js  → guarda os seus dados
+    2) main.js    → lê os dados e monta a página
+  -->
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
